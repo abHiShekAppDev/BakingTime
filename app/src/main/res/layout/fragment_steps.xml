@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailActivity"
+    android:background="@color/white">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/ingredientCardAtDA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x128"
+        app:cardCornerRadius="@dimen/x4"
+        android:elevation="@dimen/x4"
+        app:cardUseCompatPadding="true"
+        android:paddingLeft="@dimen/x16"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginRight="@dimen/x16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Ingredients"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="@dimen/xs22"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x16"/>
+
+            <TextView
+                android:id="@+id/noOfIngredientTvAtDA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textSize="@dimen/xs12"
+                android:background="@color/colorAccent"
+                android:textColor="@color/white"
+                android:paddingTop="@dimen/x8"
+                android:paddingBottom="@dimen/x8"
+                android:paddingRight="@dimen/x16"
+                android:textAlignment="textEnd"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewAtDA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/x8"/>
+
+</LinearLayout>

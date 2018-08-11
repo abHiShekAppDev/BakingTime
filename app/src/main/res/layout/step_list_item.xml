@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/x16"
+    android:paddingRight="@dimen/x16"
+    android:layout_marginTop="@dimen/x8"
+    android:layout_marginBottom="@dimen/xs16">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x128"
+        app:cardCornerRadius="@dimen/x4"
+        android:elevation="@dimen/x4"
+        app:cardUseCompatPadding="true"
+        android:paddingLeft="@dimen/x16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/stepSubDescriptionAtDA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Short Description"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="@dimen/xs22"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x16"/>
+
+            <TextView
+                android:id="@+id/stepNoAtDA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Step 1"
+                android:textSize="@dimen/xs12"
+                android:background="@color/colorAccent"
+                android:textColor="@color/white"
+                android:paddingTop="@dimen/x8"
+                android:paddingBottom="@dimen/x8"
+                android:paddingRight="@dimen/x16"
+                android:textAlignment="textEnd"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
