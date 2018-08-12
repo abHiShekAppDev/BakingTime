@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/x16"
-    android:paddingRight="@dimen/x16">
+    android:paddingRight="@dimen/x16"
+    android:background="@color/white">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -31,9 +32,8 @@
                 android:layout_height="@dimen/x64"
                 android:orientation="vertical"
                 android:layout_below="@id/bakingListIvAtHP"
-                android:paddingLeft="@dimen/x16"
                 android:paddingTop="@dimen/x8"
-                android:background="#BDBDBD">
+                android:background="@color/lightWhite">
 
                 <TextView
                     android:id="@+id/recipeNameTvAtHP"
@@ -43,7 +43,8 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/xs22"
                     android:textStyle="normal"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x16"/>
 
                 <TextView
                     android:id="@+id/servingTvAtHP"
@@ -52,7 +53,8 @@
                     android:textSize="@dimen/xs16"
                     android:text="For 8 people"
                     android:textColor="@color/boldGrey"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x16"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -62,34 +64,35 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x100"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@drawable/green_oval_background"
                 android:layout_alignParentRight="true"
                 android:paddingLeft="@dimen/x16"
                 android:paddingRight="@dimen/x16"
-                android:layout_marginRight="@dimen/x16"
-                android:layout_marginTop="@dimen/x12">
+                android:layout_marginRight="@dimen/x8"
+                android:layout_marginTop="@dimen/x8">
 
                 <ImageView
                     android:layout_width="@dimen/x16"
                     android:layout_height="@dimen/x16"
-                    android:src="@drawable/ic_mode_comment_black_24dp"
+                    android:src="@drawable/ic_shopping_cart_black_24dp"
                     android:contentDescription="@string/imageContentDesc"
                     android:layout_marginTop="@dimen/x4"
                     android:layout_marginBottom="@dimen/x4"/>
 
                 <TextView
                     android:id="@+id/noOfIngredientTvAtHP"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="8"
                     android:textColor="@color/white"
                     android:textSize="@dimen/xs16"
                     android:textStyle="bold"
                     android:layout_marginRight="@dimen/x4"
-                    android:layout_marginLeft="@dimen/x2" />
+                    android:layout_marginLeft="@dimen/x2"
+                    android:layout_weight="1"/>
 
                 <View
                     android:layout_width="@dimen/x1"
@@ -97,35 +100,31 @@
                     android:background="@color/white"
                     android:layout_marginLeft="@dimen/x8"
                     android:layout_marginRight="@dimen/x8"
-                    android:layout_marginTop="@dimen/x2"
-                    android:layout_marginBottom="@dimen/x2"/>
+                    android:layout_marginTop="@dimen/x4"
+                    android:layout_marginBottom="@dimen/x4"/>
 
                 <ImageView
                     android:layout_width="@dimen/x16"
                     android:layout_height="@dimen/x16"
-                    android:src="@drawable/ic_video_library_black_24dp"
+                    android:src="@drawable/ic_directions_walk_black_24dp"
                     android:contentDescription="@string/imageContentDesc"
                     android:layout_marginTop="@dimen/x4"
                     android:layout_marginBottom="@dimen/x4"/>
 
                 <TextView
                     android:id="@+id/noOfStepsTvAtHP"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="8"
                     android:textColor="@color/white"
                     android:textSize="@dimen/xs16"
                     android:textStyle="bold"
                     android:layout_marginRight="@dimen/x4"
-                    android:layout_marginLeft="@dimen/x2" />
+                    android:layout_marginLeft="@dimen/x2"
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:background="@color/boldGrey"
-                android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

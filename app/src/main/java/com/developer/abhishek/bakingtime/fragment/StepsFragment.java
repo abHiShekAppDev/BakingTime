@@ -1,7 +1,10 @@
 package com.developer.abhishek.bakingtime.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -21,6 +24,7 @@ import com.developer.abhishek.bakingtime.listener.RecyclerItemClickListener;
 import com.developer.abhishek.bakingtime.model.Ingredients;
 import com.developer.abhishek.bakingtime.model.Steps;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,8 +32,9 @@ import butterknife.ButterKnife;
 
 public class StepsFragment extends Fragment {
 
-    private List<Steps> stepsList;
-    private List<Ingredients> ingredientsList;
+    private final String RECYCLER_STATE_SAVED_KEY = "recycler_state";
+    private final String INGREDIENTS_STATE_SAVED_KEY = "ingredients_list";
+    private final String STEPS_STATE_SAVED_KEY = "steps_list";
 
     @BindView(R.id.noOfIngredientTvAtDA)
     TextView noOfIngredients;
@@ -38,16 +43,52 @@ public class StepsFragment extends Fragment {
     @BindView(R.id.ingredientCardAtDA)
     CardView ingredientCard;
 
-    public void setStepsList(List<Steps> stepsList) {
-        this.stepsList = stepsList;
+    private ArrayList<Steps> stepsList = new ArrayList<>();
+    private ArrayList<Ingredients> ingredientsList = new ArrayList<>();
+    private Parcelable parcelable;
+
+    onStepSelectedListener onStepSelectedListener;
+
+    public interface onStepSelectedListener{
+        void onStepSelected(int position);
     }
 
-    public void setIngredientsList(List<Ingredients> ingredientsList) {
-        this.ingredientsList = ingredientsList;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            onStepSelectedListener = (onStepSelectedListener) context;
+        }catch (Exception e){
+            throw new ClassCastException(context.toString() + " not implemented onStepSelectedListener");
+        }
     }
 
     public StepsFragment() {
         // Required empty public constructor
+    }
+
+    public void setStepsList(List<Steps> stepsLists) {
+        stepsList.addAll(stepsLists);
+    }
+
+    public void setIngredientsList(List<Ingredients> ingredientsLists) {
+        ingredientsList.addAll(ingredientsLists);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            if(savedInstanceState.containsKey(RECYCLER_STATE_SAVED_KEY)){
+                parcelable = ((Bundle) savedInstanceState).getParcelable(RECYCLER_STATE_SAVED_KEY);
+            }
+            if(savedInstanceState.containsKey(STEPS_STATE_SAVED_KEY)){
+                stepsList = savedInstanceState.getParcelableArrayList(STEPS_STATE_SAVED_KEY);
+            }
+            if(savedInstanceState.containsKey(INGREDIENTS_STATE_SAVED_KEY)){
+                ingredientsList = savedInstanceState.getParcelableArrayList(INGREDIENTS_STATE_SAVED_KEY);
+            }
+        }
     }
 
     @Override
@@ -58,31 +99,42 @@ public class StepsFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(RECYCLER_STATE_SAVED_KEY,recyclerView.getLayoutManager().onSaveInstanceState());
+        outState.putParcelableArrayList(INGREDIENTS_STATE_SAVED_KEY,ingredientsList);
+        outState.putParcelableArrayList(STEPS_STATE_SAVED_KEY,stepsList);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(ingredientsList != null){
-            noOfIngredients.setText(String.valueOf(ingredientsList.size()));
+            noOfIngredients.setText(String.valueOf("Number of ingredients required -> "+ingredientsList.size()));
+        }
+
+        if(stepsList != null){
+            StepListAdapter stepListAdapter = new StepListAdapter(stepsList,getActivity());
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setAdapter(stepListAdapter);
+            if(parcelable != null){
+                recyclerView.getLayoutManager().onRestoreInstanceState(parcelable);
+            }
         }
 
         ingredientCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                onStepSelectedListener.onStepSelected(0);
             }
         });
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                onStepSelectedListener.onStepSelected(position+1);
             }
         }));
-
-       if(stepsList != null){
-           StepListAdapter stepListAdapter = new StepListAdapter(stepsList,getActivity());
-           recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
-           recyclerView.setHasFixedSize(true);
-           recyclerView.setAdapter(stepListAdapter);
-       }
     }
 }

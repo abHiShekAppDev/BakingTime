@@ -30,9 +30,8 @@
                 android:layout_weight="1"
                 android:text="Ingredients"
                 android:textColor="@color/black"
-                android:textStyle="normal"
+                android:textStyle="bold"
                 android:textSize="@dimen/xs22"
-                android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/x16"/>
 

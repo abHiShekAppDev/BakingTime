@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.developer.abhishek.bakingtime.R;
 import com.developer.abhishek.bakingtime.model.Steps;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -18,10 +19,10 @@ import butterknife.ButterKnife;
 
 public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.CustomStepListAdapter>{
 
-    List<Steps> stepsList;
-    Context context;
+    private ArrayList<Steps> stepsList;
+    private Context context;
 
-    public StepListAdapter(List<Steps> stepsList, Context context) {
+    public StepListAdapter(ArrayList<Steps> stepsList, Context context) {
         this.stepsList = stepsList;
         this.context = context;
     }
@@ -37,7 +38,8 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.Custom
     public void onBindViewHolder(@NonNull CustomStepListAdapter holder, int position) {
         if(position<stepsList.size()){
             holder.stepHeading.setText(stepsList.get(position).getShortDescription());
-            holder.stepNo.setText("STEP -> "+position+1);
+            int pos = position+1;
+            holder.stepNo.setText("STEP NUMBER -> "+String.valueOf(pos));
         }
     }
 

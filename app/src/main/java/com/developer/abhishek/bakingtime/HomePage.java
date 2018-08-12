@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.developer.abhishek.bakingtime.adapter.BakingListAdapter;
 import com.developer.abhishek.bakingtime.listener.RecyclerItemClickListener;
@@ -36,12 +35,11 @@ public class HomePage extends AppCompatActivity {
     @BindView(R.id.progressBarAtHP)
     ProgressBar progressBar;
 
-    private int NO_OF_IMAGE = 1;
-    private Parcelable parcelable;
-
     private final String RECYCLER_STATE_SAVED_KEY = "recycler_state";
 
+    private int NO_OF_IMAGE = 1;
     private List<BakingListModel> bakingListModels;
+    private Parcelable parcelable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +56,6 @@ public class HomePage extends AppCompatActivity {
         }else{
            if(!networkStatus()){
                showError();
-           }else{
-
            }
         }
         loadBakingItem();
