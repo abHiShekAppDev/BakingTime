@@ -30,6 +30,8 @@ public class DetailActivity extends AppCompatActivity implements StepsFragment.o
             closeOnError();
         }
 
+        getSupportActionBar().setTitle(bakingListModel.getName());
+
         if(findViewById(R.id.stepListFrameLayoutAtDA) == null){
             twoPaneLayout = false;
             if(savedInstanceState == null){

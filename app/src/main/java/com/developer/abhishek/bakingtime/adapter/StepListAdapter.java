@@ -12,7 +12,6 @@ import com.developer.abhishek.bakingtime.R;
 import com.developer.abhishek.bakingtime.model.Steps;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

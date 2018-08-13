@@ -31,17 +31,26 @@ public class DescriptionActivity extends AppCompatActivity {
             closeOnError();
         }
 
-        if(position == 0){
-            StepDescriptionFragment stepDescriptionFragment = new StepDescriptionFragment();
-            stepDescriptionFragment.setFlag(true);
-            stepDescriptionFragment.setIngredients(bakingListModel.getIngredients());
-            getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutAtDESA,stepDescriptionFragment).commit();
-        }else{
-            StepDescriptionFragment stepDescriptionFragment = new StepDescriptionFragment();
-            stepDescriptionFragment.setFlag(false);
-            stepDescriptionFragment.setSteps(bakingListModel.getSteps().get(position-1));
-            getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutAtDESA,stepDescriptionFragment).commit();
+        getSupportActionBar().setTitle(bakingListModel.getName());
+
+        if(savedInstanceState == null){
+            if(position == 0){
+                StepDescriptionFragment stepDescriptionFragment = new StepDescriptionFragment();
+                stepDescriptionFragment.setFlag(true);
+                stepDescriptionFragment.setIngredients(bakingListModel.getIngredients());
+                getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutAtDESA,stepDescriptionFragment).commit();
+            }else{
+                StepDescriptionFragment stepDescriptionFragment = new StepDescriptionFragment();
+                stepDescriptionFragment.setFlag(false);
+                stepDescriptionFragment.setSteps(bakingListModel.getSteps().get(position-1));
+                getSupportFragmentManager().beginTransaction().add(R.id.frameLayoutAtDESA,stepDescriptionFragment).commit();
+            }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     private void closeOnError(){

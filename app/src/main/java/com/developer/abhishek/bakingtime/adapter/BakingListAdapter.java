@@ -44,6 +44,7 @@ public class BakingListAdapter  extends RecyclerView.Adapter<BakingListAdapter.B
             holder.steps.setText(String.valueOf(bakingListList.get(position).getSteps().size()));
 
             //  Using a image instead of place holder
+            // TODO Adding vector image
             int myImagePos = position%4;
             if(myImagePos == 0){
                 Picasso.get().load(R.drawable.pie).into(holder.recipeImage);

@@ -7,6 +7,12 @@
     tools:context=".fragment.StepDescriptionFragment"
     android:background="@color/white">
 
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/exoPlayerLandAtDA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,15 +22,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/exoPlayerAtDA"
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:id="@+id/exoPlayerPortAtDA"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x256"
-                android:src="@drawable/ic_launcher_background"
-                android:contentDescription="@string/imageContentDesc"
-                android:scaleType="fitXY"
-                android:layout_marginBottom="@dimen/x32"/>
-
+                android:layout_marginBottom="@dimen/x32"
+                android:layout_marginTop="@dimen/x32"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,7 +45,6 @@
                     android:textColor="@color/black"
                     android:fontFamily="sans-serif-condensed"
                     android:textStyle="bold"
-                    android:text="Ingredients : "
                     android:paddingTop="@dimen/x4"
                     android:paddingBottom="@dimen/x4"/>
 
@@ -49,7 +52,6 @@
                     android:id="@+id/descriptionTextAtDA"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the First Mix the "
                     android:textColor="@color/boldGrey"
                     android:textStyle="normal"
                     android:paddingLeft="@dimen/x16"

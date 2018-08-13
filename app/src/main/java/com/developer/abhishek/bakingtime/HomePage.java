@@ -30,12 +30,12 @@ import butterknife.ButterKnife;
 
 public class HomePage extends AppCompatActivity {
 
+    private final String RECYCLER_STATE_SAVED_KEY = "recycler_state";
+
     @BindView(R.id.recyclerViewAtHP)
     RecyclerView recyclerView;
     @BindView(R.id.progressBarAtHP)
     ProgressBar progressBar;
-
-    private final String RECYCLER_STATE_SAVED_KEY = "recycler_state";
 
     private int NO_OF_IMAGE = 1;
     private List<BakingListModel> bakingListModels;

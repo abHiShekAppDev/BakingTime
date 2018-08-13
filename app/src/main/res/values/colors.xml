@@ -10,4 +10,6 @@
     <color name="lightBlack">#212121</color>
     <color name="boldGrey">#9E9E9E</color>
     <color name="lightGrey">#BDBDBD</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
