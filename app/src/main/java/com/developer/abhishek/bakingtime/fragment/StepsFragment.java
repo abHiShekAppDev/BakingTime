@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
 import com.developer.abhishek.bakingtime.R;
@@ -110,6 +112,10 @@ public class StepsFragment extends Fragment {
         }
 
         if(stepsList != null){
+            int resId = R.anim.recycler_animation;
+            LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getActivity(), resId);
+            recyclerView.setLayoutAnimation(animation);
+
             StepListAdapter stepListAdapter = new StepListAdapter(stepsList,getActivity());
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
             recyclerView.setHasFixedSize(true);

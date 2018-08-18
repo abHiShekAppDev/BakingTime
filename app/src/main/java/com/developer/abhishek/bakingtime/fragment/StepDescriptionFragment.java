@@ -1,6 +1,7 @@
 package com.developer.abhishek.bakingtime.fragment;
 
 import android.content.res.Configuration;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.developer.abhishek.bakingtime.R;
@@ -26,6 +28,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +133,7 @@ public class StepDescriptionFragment extends Fragment {
             descText.setText(steps.getDescription());
 
             videoUrl = steps.getVideoURL();
+
             if(videoUrl == null || videoUrl.isEmpty()){
                 simpleExoPlayerViewPort.setVisibility(View.GONE);
                 simpleExoPlayerViewLand.setVisibility(View.GONE);

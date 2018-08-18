@@ -2,127 +2,106 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/x16"
-    android:paddingRight="@dimen/x16"
+    android:layout_height="@dimen/x176"
     android:background="@color/white">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardPreventCornerOverlap="true"
-        android:elevation="@dimen/x8"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/x16"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginTop="@dimen/x8"
         android:layout_marginBottom="@dimen/x16"
-        android:layout_marginTop="@dimen/x8">
+        app:cardElevation="@dimen/x8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/x4">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/bakingListIvAtHP"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/recipeNameTvAtHP"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x220"
-                android:src="@drawable/pie"
-                android:scaleType="fitXY"
-                android:contentDescription="@string/imageContentDesc"/>
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="@dimen/xs22"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x16"
+                android:singleLine="true"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x64"
-                android:orientation="vertical"
-                android:layout_below="@id/bakingListIvAtHP"
-                android:paddingTop="@dimen/x8"
-                android:background="@color/lightWhite">
-
-                <TextView
-                    android:id="@+id/recipeNameTvAtHP"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/xs22"
-                    android:textStyle="normal"
-                    android:layout_weight="1"
-                    android:paddingLeft="@dimen/x16"/>
-
-                <TextView
-                    android:id="@+id/servingTvAtHP"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="@dimen/xs16"
-                    android:textColor="@color/boldGrey"
-                    android:layout_weight="1"
-                    android:paddingLeft="@dimen/x16"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x1"
-                    android:background="@color/boldGrey"
-                    android:layout_alignParentBottom="true"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="@dimen/x100"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/x38"
                 android:orientation="horizontal"
-                android:background="@drawable/green_oval_background"
-                android:layout_alignParentRight="true"
-                android:paddingLeft="@dimen/x16"
+                android:background="@color/colorAccent"
                 android:paddingRight="@dimen/x16"
-                android:layout_marginRight="@dimen/x8"
-                android:layout_marginTop="@dimen/x8">
+                android:paddingLeft="@dimen/x32">
 
-                <ImageView
-                    android:layout_width="@dimen/x16"
-                    android:layout_height="@dimen/x16"
-                    android:src="@drawable/ic_shopping_cart_black_24dp"
-                    android:contentDescription="@string/imageContentDesc"
-                    android:layout_marginTop="@dimen/x4"
-                    android:layout_marginBottom="@dimen/x4"/>
-
-                <TextView
-                    android:id="@+id/noOfIngredientTvAtHP"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/xs16"
-                    android:textStyle="bold"
-                    android:layout_marginRight="@dimen/x4"
-                    android:layout_marginLeft="@dimen/x2"
-                    android:layout_weight="1"/>
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="@dimen/x16"
+                        android:layout_height="@dimen/x16"
+                        android:src="@drawable/ic_shopping_cart_black_24dp"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/noOfIngredientTvAtHP"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/x4"
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
-                <View
-                    android:layout_width="@dimen/x1"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:layout_marginLeft="@dimen/x8"
-                    android:layout_marginRight="@dimen/x8"
-                    android:layout_marginTop="@dimen/x4"
-                    android:layout_marginBottom="@dimen/x4"/>
-
-                <ImageView
-                    android:layout_width="@dimen/x16"
-                    android:layout_height="@dimen/x16"
-                    android:src="@drawable/ic_directions_walk_black_24dp"
-                    android:contentDescription="@string/imageContentDesc"
-                    android:layout_marginTop="@dimen/x4"
-                    android:layout_marginBottom="@dimen/x4"/>
-
-                <TextView
-                    android:id="@+id/noOfStepsTvAtHP"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/xs16"
-                    android:textStyle="bold"
-                    android:layout_marginRight="@dimen/x4"
-                    android:layout_marginLeft="@dimen/x2"
-                    android:layout_weight="1"/>
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="@dimen/x16"
+                        android:layout_height="@dimen/x16"
+                        android:src="@drawable/ic_directions_walk_black_24dp"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/noOfStepsTvAtHP"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/x4"
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="@dimen/x16"
+                        android:layout_height="@dimen/x16"
+                        android:src="@drawable/ic_person_black_24dp"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/servingTvAtHP"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/x4"
+                        android:textColor="@color/white" />
+                </LinearLayout>
             </LinearLayout>
-
-        </RelativeLayout>
-
+        </LinearLayout>
     </android.support.v7.widget.CardView>
-
 </FrameLayout>

@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/ingredientNameATWID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/xs22" />
+
+    <TextView
+        android:id="@+id/ingredientListATWID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:textColor="@color/boldGrey"
+        android:textStyle="normal"
+        android:textSize="@dimen/xs16"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:paddingRight="@dimen/x4"
+        android:paddingLeft="@dimen/x4"/>
+
+   <LinearLayout
+       android:id="@+id/linearLayout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="@dimen/x16"
+       android:layout_alignParentBottom="true"
+       android:layout_marginBottom="@dimen/x8">
+
+       <ImageView
+           android:id="@+id/prevBtnAtWid"
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/x38"
+           android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+           android:layout_weight="1"
+           android:layout_gravity="center"/>
+
+       <ImageView
+           android:id="@+id/startCookBtnAtWid"
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/x48"
+           android:src="@drawable/ic_restaurant_menu_black_24dp"
+           android:layout_weight="1"/>
+
+       <ImageView
+           android:id="@+id/nextBtnAtWid"
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/x38"
+           android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+           android:layout_weight="1"
+           android:layout_gravity="center"/>
+
+   </LinearLayout>
+</LinearLayout>

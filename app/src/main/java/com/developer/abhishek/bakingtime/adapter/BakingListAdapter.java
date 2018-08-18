@@ -39,22 +39,9 @@ public class BakingListAdapter  extends RecyclerView.Adapter<BakingListAdapter.B
     public void onBindViewHolder(@NonNull BakingListCustomAdapter holder, int position) {
         if(position<bakingListList.size()){
             holder.recipeName.setText(bakingListList.get(position).getName());
-            holder.serving.setText("For "+bakingListList.get(position).getServings()+" people");
+            holder.serving.setText(String.valueOf(bakingListList.get(position).getServings()));
             holder.noOfIngredients.setText(String.valueOf(bakingListList.get(position).getIngredients().size()));
             holder.steps.setText(String.valueOf(bakingListList.get(position).getSteps().size()));
-
-            //  Using a image instead of place holder
-            // TODO Adding vector image
-            int myImagePos = position%4;
-            if(myImagePos == 0){
-                Picasso.get().load(R.drawable.pie).into(holder.recipeImage);
-            }else if(myImagePos == 1){
-                Picasso.get().load(R.drawable.brownies).into(holder.recipeImage);
-            }else if(myImagePos == 2){
-                Picasso.get().load(R.drawable.yellowcake).into(holder.recipeImage);
-            }else if(myImagePos == 3){
-                Picasso.get().load(R.drawable.cheesecake).into(holder.recipeImage);
-            }
         }
     }
 
@@ -73,8 +60,6 @@ public class BakingListAdapter  extends RecyclerView.Adapter<BakingListAdapter.B
         TextView steps;
         @BindView(R.id.noOfIngredientTvAtHP)
         TextView noOfIngredients;
-        @BindView(R.id.bakingListIvAtHP)
-        ImageView recipeImage;
 
         public BakingListCustomAdapter(View itemView) {
             super(itemView);

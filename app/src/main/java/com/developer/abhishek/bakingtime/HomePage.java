@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.Parcelable;
@@ -22,6 +23,7 @@ import com.developer.abhishek.bakingtime.adapter.BakingListAdapter;
 import com.developer.abhishek.bakingtime.listener.RecyclerItemClickListener;
 import com.developer.abhishek.bakingtime.model.BakingListModel;
 import com.developer.abhishek.bakingtime.network.FoodViewModel;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -31,6 +33,8 @@ import butterknife.ButterKnife;
 public class HomePage extends AppCompatActivity {
 
     private final String RECYCLER_STATE_SAVED_KEY = "recycler_state";
+    private final String PREF_BAKING_LIST_SIZE = "baking_list_size";
+    private final String PREF_BAKING_LIST = "BAKING_LIST";
 
     @BindView(R.id.recyclerViewAtHP)
     RecyclerView recyclerView;
@@ -40,6 +44,8 @@ public class HomePage extends AppCompatActivity {
     private int NO_OF_IMAGE = 1;
     private List<BakingListModel> bakingListModels;
     private Parcelable parcelable;
+
+    private boolean isLoadFirstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +59,12 @@ public class HomePage extends AppCompatActivity {
             if(savedInstanceState.containsKey(RECYCLER_STATE_SAVED_KEY)){
                 parcelable = ((Bundle) savedInstanceState).getParcelable(RECYCLER_STATE_SAVED_KEY);
             }
+            isLoadFirstTime = false;
         }else{
            if(!networkStatus()){
                showError();
            }
+           isLoadFirstTime = true;
         }
         loadBakingItem();
 
@@ -99,6 +107,9 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<BakingListModel> bakingListModels) {
                 setList(bakingListModels);
+                if(isLoadFirstTime){
+                    savedToPref(bakingListModels);
+                }
             }
         });
     }
@@ -120,6 +131,17 @@ public class HomePage extends AppCompatActivity {
         if(parcelable != null){
             recyclerView.getLayoutManager().onRestoreInstanceState(parcelable);
         }
+    }
+
+    private void savedToPref(List<BakingListModel> bakingListModels){
+        SharedPreferences.Editor editor = getSharedPreferences(PREF_BAKING_LIST, MODE_PRIVATE).edit();
+        Gson gson = new Gson();
+        for(int i=0;i<bakingListModels.size();i++){
+            String json = gson.toJson(bakingListModels.get(i));
+            editor.putString(String.valueOf(i), json);
+        }
+        editor.putInt(PREF_BAKING_LIST_SIZE,bakingListModels.size());
+        editor.commit();
     }
 
     private void showError(){
