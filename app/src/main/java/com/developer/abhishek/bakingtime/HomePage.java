@@ -10,6 +10,8 @@ import android.net.ConnectivityManager;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,6 +25,7 @@ import com.developer.abhishek.bakingtime.adapter.BakingListAdapter;
 import com.developer.abhishek.bakingtime.listener.RecyclerItemClickListener;
 import com.developer.abhishek.bakingtime.model.BakingListModel;
 import com.developer.abhishek.bakingtime.network.FoodViewModel;
+import com.developer.abhishek.bakingtime.util.SimpleIdlingResource;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -41,11 +44,23 @@ public class HomePage extends AppCompatActivity {
     @BindView(R.id.progressBarAtHP)
     ProgressBar progressBar;
 
+
+    private SimpleIdlingResource simpleIdlingResource;
+
     private int NO_OF_IMAGE = 1;
     private List<BakingListModel> bakingListModels;
     private Parcelable parcelable;
 
     private boolean isLoadFirstTime = true;
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (simpleIdlingResource == null) {
+            simpleIdlingResource = new SimpleIdlingResource();
+        }
+        return simpleIdlingResource;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +68,7 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         ButterKnife.bind(this);
 
+        getIdlingResource();
         checkOrientation();
 
         if(savedInstanceState != null){
@@ -61,10 +77,10 @@ public class HomePage extends AppCompatActivity {
             }
             isLoadFirstTime = false;
         }else{
-           if(!networkStatus()){
-               showError();
-           }
-           isLoadFirstTime = true;
+            if(!networkStatus()){
+                showError();
+            }
+            isLoadFirstTime = true;
         }
         loadBakingItem();
 
@@ -101,6 +117,10 @@ public class HomePage extends AppCompatActivity {
     }
 
     private void loadBakingItem(){
+        if(simpleIdlingResource != null){
+            simpleIdlingResource.setIdleState(false);
+        }
+
         progressBar.setVisibility(View.VISIBLE);
         FoodViewModel foodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
         foodViewModel.getAllFoodItem().observe(this, new Observer<List<BakingListModel>>() {
@@ -122,12 +142,15 @@ public class HomePage extends AppCompatActivity {
 
         int resId = R.anim.recycler_animation;
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
-        recyclerView.setLayoutAnimation(animation);
+       // recyclerView.setLayoutAnimation(animation);
 
         BakingListAdapter listAdapter = new BakingListAdapter(bakingListModel,this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, NO_OF_IMAGE));
         recyclerView.setAdapter(listAdapter);
+        if(simpleIdlingResource != null){
+            simpleIdlingResource.setIdleState(true);
+        }
         if(parcelable != null){
             recyclerView.getLayoutManager().onRestoreInstanceState(parcelable);
         }
