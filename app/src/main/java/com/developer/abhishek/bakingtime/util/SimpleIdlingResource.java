@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SimpleIdlingResource implements IdlingResource{
 
-    private volatile IdlingResource.ResourceCallback mCallback;
+    @Nullable private volatile ResourceCallback mCallback;
 
     private AtomicBoolean mIsIdleNow = new AtomicBoolean(true);
 
@@ -22,7 +22,7 @@ public class SimpleIdlingResource implements IdlingResource{
     }
 
     @Override
-    public void registerIdleTransitionCallback(IdlingResource.ResourceCallback callback) {
+    public void registerIdleTransitionCallback(ResourceCallback callback) {
         mCallback = callback;
     }
 

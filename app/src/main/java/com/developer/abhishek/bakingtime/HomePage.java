@@ -44,7 +44,7 @@ public class HomePage extends AppCompatActivity {
     @BindView(R.id.progressBarAtHP)
     ProgressBar progressBar;
 
-
+    @Nullable
     private SimpleIdlingResource simpleIdlingResource;
 
     private int NO_OF_IMAGE = 1;
@@ -53,23 +53,14 @@ public class HomePage extends AppCompatActivity {
 
     private boolean isLoadFirstTime = true;
 
-    @VisibleForTesting
-    @NonNull
-    public IdlingResource getIdlingResource() {
-        if (simpleIdlingResource == null) {
-            simpleIdlingResource = new SimpleIdlingResource();
-        }
-        return simpleIdlingResource;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         ButterKnife.bind(this);
 
-        getIdlingResource();
         checkOrientation();
+        getIdlingResource();
 
         if(savedInstanceState != null){
             if(savedInstanceState.containsKey(RECYCLER_STATE_SAVED_KEY)){
@@ -82,6 +73,7 @@ public class HomePage extends AppCompatActivity {
             }
             isLoadFirstTime = true;
         }
+
         loadBakingItem();
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
@@ -102,6 +94,15 @@ public class HomePage extends AppCompatActivity {
         outState.putParcelable(RECYCLER_STATE_SAVED_KEY,recyclerView.getLayoutManager().onSaveInstanceState());
     }
 
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (simpleIdlingResource == null) {
+            simpleIdlingResource = new SimpleIdlingResource();
+        }
+        return simpleIdlingResource;
+    }
+
     private boolean networkStatus(){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return (connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isAvailable() && connectivityManager.getActiveNetworkInfo().isConnected());
@@ -117,6 +118,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     private void loadBakingItem(){
+
         if(simpleIdlingResource != null){
             simpleIdlingResource.setIdleState(false);
         }
@@ -142,17 +144,18 @@ public class HomePage extends AppCompatActivity {
 
         int resId = R.anim.recycler_animation;
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
-       // recyclerView.setLayoutAnimation(animation);
+        recyclerView.setLayoutAnimation(animation);
 
         BakingListAdapter listAdapter = new BakingListAdapter(bakingListModel,this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, NO_OF_IMAGE));
         recyclerView.setAdapter(listAdapter);
-        if(simpleIdlingResource != null){
-            simpleIdlingResource.setIdleState(true);
-        }
         if(parcelable != null){
             recyclerView.getLayoutManager().onRestoreInstanceState(parcelable);
+        }
+
+        if(simpleIdlingResource != null){
+            simpleIdlingResource.setIdleState(true);
         }
     }
 

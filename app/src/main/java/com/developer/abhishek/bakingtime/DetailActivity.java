@@ -7,6 +7,11 @@ import android.os.Bundle;
 import com.developer.abhishek.bakingtime.fragment.StepDescriptionFragment;
 import com.developer.abhishek.bakingtime.fragment.StepsFragment;
 import com.developer.abhishek.bakingtime.model.BakingListModel;
+import com.developer.abhishek.bakingtime.model.Ingredients;
+import com.developer.abhishek.bakingtime.model.Steps;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity implements StepsFragment.onStepSelectedListener{
 
