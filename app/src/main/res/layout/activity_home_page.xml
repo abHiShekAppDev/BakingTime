@@ -23,5 +23,40 @@
         android:layout_height="match_parent" />
 
     <!-- Error message layout -->
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/errorLayout">
+
+        <ImageView
+            android:layout_width="@dimen/x64"
+            android:layout_height="@dimen/x64"
+            android:src="@drawable/ic_signal_wifi_off_black_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/x32"
+            android:paddingRight="@dimen/x32"
+            android:textColor="@color/boldGrey"
+            android:text="@string/internetError"
+            android:textAlignment="center"
+            android:layout_marginTop="@dimen/x128"
+            android:textSize="@dimen/xs16"/>
+
+        <Button
+            android:id="@+id/retry"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x48"
+            android:text="@string/tryAgainStr"
+            android:textAllCaps="false"
+            android:background="@drawable/retry_button_bg"
+            android:layout_marginTop="@dimen/x32"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-condensed"/>
+
+    </LinearLayout>
 
 </LinearLayout>

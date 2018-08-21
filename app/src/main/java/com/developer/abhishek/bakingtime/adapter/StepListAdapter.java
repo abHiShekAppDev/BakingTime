@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 
 public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.CustomStepListAdapter>{
 
-    private ArrayList<Steps> stepsList;
-    private Context context;
+    private final ArrayList<Steps> stepsList;
+    private final Context context;
 
     public StepListAdapter(ArrayList<Steps> stepsList, Context context) {
         this.stepsList = stepsList;
@@ -36,9 +36,11 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.Custom
     @Override
     public void onBindViewHolder(@NonNull CustomStepListAdapter holder, int position) {
         if(position<stepsList.size()){
+            int stepCount = position+1;
+            String stepNumber = String.format(context.getResources().getString(R.string.stepNumberStr),stepCount);
+
             holder.stepHeading.setText(stepsList.get(position).getShortDescription());
-            int pos = position+1;
-            holder.stepNo.setText("STEP NUMBER -> "+String.valueOf(pos));
+            holder.stepNo.setText(stepNumber);
         }
     }
 
@@ -54,7 +56,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.Custom
         @BindView(R.id.stepNoAtDA)
         TextView stepNo;
 
-        public CustomStepListAdapter(View itemView) {
+        private CustomStepListAdapter(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }

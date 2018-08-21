@@ -3,15 +3,11 @@ package com.developer.abhishek.bakingtime;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.developer.abhishek.bakingtime.fragment.StepDescriptionFragment;
 import com.developer.abhishek.bakingtime.fragment.StepsFragment;
 import com.developer.abhishek.bakingtime.model.BakingListModel;
-import com.developer.abhishek.bakingtime.model.Ingredients;
-import com.developer.abhishek.bakingtime.model.Steps;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DetailActivity extends AppCompatActivity implements StepsFragment.onStepSelectedListener{
 
@@ -19,6 +15,8 @@ public class DetailActivity extends AppCompatActivity implements StepsFragment.o
 
     private BakingListModel bakingListModel;
     private boolean twoPaneLayout = false;
+
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,5 +83,10 @@ public class DetailActivity extends AppCompatActivity implements StepsFragment.o
 
     private void closeOnError(){
         finish();
+        if(toast != null){
+            toast.cancel();
+        }
+        toast = Toast.makeText(DetailActivity.this,getResources().getString(R.string.tryAgainError),Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

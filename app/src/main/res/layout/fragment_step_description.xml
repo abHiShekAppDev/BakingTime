@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".fragment.StepDescriptionFragment"
-    android:background="@color/white">
+    tools:context=".fragment.StepDescriptionFragment">
 
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/exoPlayerLandAtDA"
@@ -20,44 +20,54 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white">
 
             <com.google.android.exoplayer2.ui.SimpleExoPlayerView
                 android:id="@+id/exoPlayerPortAtDA"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x256"
+                android:layout_height="@dimen/x280"
                 android:layout_marginBottom="@dimen/x32"
-                android:layout_marginTop="@dimen/x32"
                 android:visibility="gone"/>
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/x16"
-                android:paddingRight="@dimen/x16">
+                android:elevation="@dimen/x8"
+                android:paddingBottom="@dimen/x8"
+                app:cardElevation="@dimen/x8"
+                app:contentPadding="@dimen/x8"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/descriptionHeadAtDA"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/xs22"
-                    android:textColor="@color/black"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textStyle="bold"
-                    android:paddingTop="@dimen/x4"
-                    android:paddingBottom="@dimen/x4"/>
-
-                <TextView
-                    android:id="@+id/descriptionTextAtDA"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/boldGrey"
-                    android:textStyle="normal"
+                    android:orientation="vertical"
                     android:paddingLeft="@dimen/x16"
-                    android:paddingTop="@dimen/x8"
-                    android:fontFamily="sans-serif-condensed"/>
-            </LinearLayout>
+                    android:paddingRight="@dimen/x16">
+
+                    <TextView
+                        android:id="@+id/descriptionHeadAtDA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/xs22"
+                        android:textColor="@color/black"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textStyle="bold"
+                        android:paddingTop="@dimen/x4"
+                        android:paddingBottom="@dimen/x4"/>
+
+                    <TextView
+                        android:id="@+id/descriptionTextAtDA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/boldGrey"
+                        android:textStyle="normal"
+                        android:paddingLeft="@dimen/x16"
+                        android:paddingTop="@dimen/x8"
+                        android:fontFamily="sans-serif-condensed"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

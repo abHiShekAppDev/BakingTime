@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -28,7 +27,7 @@ public class IngredientWidget extends AppWidgetProvider {
 
         Bundle bundle = appWidgetManager.getAppWidgetOptions(appWidgetId);
         height = bundle.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
-        views = new RemoteViews(context.getPackageName(), R.layout.ingedient_widget);
+        views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
 
         loadWidget(context);
 
@@ -98,7 +97,7 @@ public class IngredientWidget extends AppWidgetProvider {
                 bakingListModels = gson.fromJson(jsonBakingList,BakingListModel.class);
 
                 if(bakingListModels != null){
-                    views = new RemoteViews(context.getPackageName(), R.layout.ingedient_widget);
+                    views = new RemoteViews(context.getPackageName(), R.layout.ingredient_widget);
                     views.setTextViewText(R.id.ingredientNameATWID,bakingListModels.getName());
                 }
             }

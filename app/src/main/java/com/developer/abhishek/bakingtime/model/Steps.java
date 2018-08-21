@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName;
 public class Steps implements Parcelable{
 
     @SerializedName(ApiEndpoint.ID)
-    private String id;
+    private final String id;
     @SerializedName(ApiEndpoint.SHORT_DESCRIPTION)
-    private String shortDescription;
+    private final String shortDescription;
     @SerializedName(ApiEndpoint.DESCRIPTION)
-    private String description;
+    private final String description;
     @SerializedName(ApiEndpoint.VIDEO_URL)
-    private String videoURL;
+    private final String videoURL;
     @SerializedName(ApiEndpoint.THUMBNAIL_URL)
-    private String thumbnailURL;
+    private final String thumbnailURL;
 
     public Steps(String id, String shortDescription, String description, String videoURL, String thumbnailURL) {
         this.id = id;

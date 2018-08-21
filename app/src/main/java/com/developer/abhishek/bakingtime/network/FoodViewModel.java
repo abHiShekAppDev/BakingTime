@@ -11,7 +11,7 @@ import java.util.List;
 public class FoodViewModel extends ViewModel {
 
     private MutableLiveData<List<BakingListModel>> bakingModelMutableLiveData;
-    private ApiRepository apiRepository = new ApiRepository();
+    private final ApiRepository apiRepository = new ApiRepository();
 
     public LiveData<List<BakingListModel>> getAllFoodItem(){
         if(bakingModelMutableLiveData == null){

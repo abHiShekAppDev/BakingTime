@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialKeyguardLayout="@layout/ingedient_widget"
-    android:initialLayout="@layout/ingedient_widget"
+    android:initialKeyguardLayout="@layout/ingredient_widget"
+    android:initialLayout="@layout/ingredient_widget"
     android:minHeight="110dp"
     android:minWidth="250dp"
     android:previewImage="@drawable/ic_restaurant_menu_black_24dp"

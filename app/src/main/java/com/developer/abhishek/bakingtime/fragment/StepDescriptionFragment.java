@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
@@ -107,7 +109,7 @@ public class StepDescriptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_step_description, container, false);
         ButterKnife.bind(this,view);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        showBar();
         return view;
     }
 
@@ -121,7 +123,7 @@ public class StepDescriptionFragment extends Fragment {
             //      INGREDIENTS
             simpleExoPlayerViewPort.setVisibility(View.GONE);
             simpleExoPlayerViewLand.setVisibility(View.GONE);
-            head.setText("Ingredients : ");
+            head.setText(getActivity().getResources().getString(R.string.ingredientsStr));
             String str = "";
             for(int i=0;i<ingredients.size();i++){
                 str += ingredients.get(i).getIngredient()+"   "+ingredients.get(i).getQuantity()+"  "+ingredients.get(i).getMeasure()+"\n";
@@ -178,6 +180,26 @@ public class StepDescriptionFragment extends Fragment {
         }
     }
 
+    private void initializePlayer(){
+        exoPlayer = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(getActivity()), new DefaultTrackSelector(), new DefaultLoadControl());
+
+        if(isPortrait){
+            simpleExoPlayerViewPort.setPlayer(exoPlayer);
+            simpleExoPlayerViewPort.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
+        }else{
+            simpleExoPlayerViewLand.setPlayer(exoPlayer);
+            simpleExoPlayerViewLand.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
+        }
+
+        MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(videoUrl),new DefaultHttpDataSourceFactory("exoPlayerVideo"), new DefaultExtractorsFactory(), null, null);
+        exoPlayer.prepare(mediaSource, true, false);
+
+        exoPlayer.seekTo(playbackPosition);
+        exoPlayer.setPlayWhenReady(playWhenReady);
+
+        hideBar();
+    }
+
     private void checkOrientation(){
         int configuration = this.getResources().getConfiguration().orientation;
         if(configuration == Configuration.ORIENTATION_PORTRAIT){
@@ -187,31 +209,21 @@ public class StepDescriptionFragment extends Fragment {
         }
     }
 
-    private void initializePlayer(){
-        exoPlayer = ExoPlayerFactory.newSimpleInstance(
-                new DefaultRenderersFactory(getActivity()),
-                new DefaultTrackSelector(), new DefaultLoadControl());
-
-        if(isPortrait){
-            simpleExoPlayerViewPort.setPlayer(exoPlayer);
-        }else{
-            simpleExoPlayerViewLand.setPlayer(exoPlayer);
-            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        }
-
-        MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(videoUrl),new DefaultHttpDataSourceFactory("exoPlayerVideo"), new DefaultExtractorsFactory(), null, null);
-        exoPlayer.prepare(mediaSource, true, false);
-
-        exoPlayer.seekTo(playbackPosition);
-        exoPlayer.setPlayWhenReady(playWhenReady);
-
-    }
-
     private void releasePlayer() {
         if (exoPlayer != null) {
             exoPlayer.release();
             exoPlayer = null;
         }
+    }
+
+    private void showBar(){
+        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+    }
+
+    private void hideBar(){
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
 }

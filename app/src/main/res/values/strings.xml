@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name" translatable="false">Baking Time</string>
 
+    <string name="stepNumberStr">STEP NUMBER -> %d</string>
+    <string name="ingredientNumberStr">Number of ingredients required -> %d</string>
+    <string name="ingredientsStr">Ingredients : </string>
+
     <!-- XML View String -->
     <string name="imageContentDesc">Image</string>
     <string name="ingredientStr">Ingredients</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="tryAgainStr">Retry</string>
+
+    <string name="internetError">Please Check Your Internet Connection</string>
+    <string name="tryAgainError">Please Try Again !!!</string>
 </resources>

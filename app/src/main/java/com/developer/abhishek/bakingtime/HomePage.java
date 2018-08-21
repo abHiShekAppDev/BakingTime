@@ -16,10 +16,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.developer.abhishek.bakingtime.adapter.BakingListAdapter;
 import com.developer.abhishek.bakingtime.listener.RecyclerItemClickListener;
@@ -32,6 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HomePage extends AppCompatActivity {
 
@@ -43,6 +47,8 @@ public class HomePage extends AppCompatActivity {
     RecyclerView recyclerView;
     @BindView(R.id.progressBarAtHP)
     ProgressBar progressBar;
+    @BindView(R.id.errorLayout)
+    LinearLayout errorLayout;
 
     @Nullable
     private SimpleIdlingResource simpleIdlingResource;
@@ -64,23 +70,24 @@ public class HomePage extends AppCompatActivity {
 
         if(savedInstanceState != null){
             if(savedInstanceState.containsKey(RECYCLER_STATE_SAVED_KEY)){
-                parcelable = ((Bundle) savedInstanceState).getParcelable(RECYCLER_STATE_SAVED_KEY);
+                parcelable = savedInstanceState.getParcelable(RECYCLER_STATE_SAVED_KEY);
             }
             isLoadFirstTime = false;
         }else{
-            if(!networkStatus()){
-                showError();
-            }
             isLoadFirstTime = true;
         }
 
-        loadBakingItem();
+        if(!networkStatus() && isLoadFirstTime){
+            showError();
+        }else{
+            loadBakingItem();
+        }
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(HomePage.this,DetailActivity.class);
-                if(bakingListModels.get(position) != null && bakingListModels!= null){
+                if(bakingListModels != null && bakingListModels.get(position) != null){
+                    Intent intent = new Intent(HomePage.this,DetailActivity.class);
                     intent.putExtra(DetailActivity.INTENT_KEY_FROM_HOME_PAGE,bakingListModels.get(position));
                     startActivity(intent);
                 }
@@ -124,21 +131,26 @@ public class HomePage extends AppCompatActivity {
         }
 
         progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.GONE);
         FoodViewModel foodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
         foodViewModel.getAllFoodItem().observe(this, new Observer<List<BakingListModel>>() {
             @Override
             public void onChanged(@Nullable List<BakingListModel> bakingListModels) {
-                setList(bakingListModels);
-                if(isLoadFirstTime){
-                    savedToPref(bakingListModels);
+                if(bakingListModels != null){
+                    setList(bakingListModels);
+                    if(isLoadFirstTime){
+                        savedToPref(bakingListModels);
+                    }
                 }
             }
         });
     }
 
     private void setList(List<BakingListModel> bakingListModel){
-        progressBar.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.GONE);
 
         this.bakingListModels = bakingListModel;
 
@@ -146,7 +158,7 @@ public class HomePage extends AppCompatActivity {
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
         recyclerView.setLayoutAnimation(animation);
 
-        BakingListAdapter listAdapter = new BakingListAdapter(bakingListModel,this);
+        BakingListAdapter listAdapter = new BakingListAdapter(bakingListModel);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, NO_OF_IMAGE));
         recyclerView.setAdapter(listAdapter);
@@ -159,6 +171,7 @@ public class HomePage extends AppCompatActivity {
         }
     }
 
+    //  saving to preference to accessible by widget
     private void savedToPref(List<BakingListModel> bakingListModels){
         SharedPreferences.Editor editor = getSharedPreferences(PREF_BAKING_LIST, MODE_PRIVATE).edit();
         Gson gson = new Gson();
@@ -167,10 +180,19 @@ public class HomePage extends AppCompatActivity {
             editor.putString(String.valueOf(i), json);
         }
         editor.putInt(PREF_BAKING_LIST_SIZE,bakingListModels.size());
-        editor.commit();
+        editor.apply();
     }
 
-    private void showError(){
+    private void showError() {
+        errorLayout.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+    }
 
+    @OnClick(R.id.retry)
+    void retry(){
+        if(networkStatus()){
+            loadBakingItem();
+        }
     }
 }

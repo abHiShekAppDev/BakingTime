@@ -3,6 +3,7 @@ package com.developer.abhishek.bakingtime;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.developer.abhishek.bakingtime.fragment.StepDescriptionFragment;
 import com.developer.abhishek.bakingtime.model.BakingListModel;
@@ -14,6 +15,8 @@ public class DescriptionActivity extends AppCompatActivity {
 
     private int position = -1;
     private BakingListModel bakingListModel;
+
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,5 +58,10 @@ public class DescriptionActivity extends AppCompatActivity {
 
     private void closeOnError(){
         finish();
+        if(toast != null){
+            toast.cancel();
+        }
+        toast = Toast.makeText(DescriptionActivity.this,getResources().getString(R.string.tryAgainError),Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

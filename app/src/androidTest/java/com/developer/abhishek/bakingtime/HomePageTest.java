@@ -23,7 +23,6 @@ import org.junit.runner.RunWith;
 import  android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-
 @RunWith(AndroidJUnit4.class)
 public class HomePageTest {
 

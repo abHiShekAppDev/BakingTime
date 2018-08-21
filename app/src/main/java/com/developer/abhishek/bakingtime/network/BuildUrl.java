@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BuildUrl {
 
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = ApiEndpoint.BASE_URL;   //  Non translatable Base Url
+    private static final String BASE_URL = ApiEndpoint.BASE_URL;
 
     public static Retrofit getRetrofit(){
         if(retrofit == null){

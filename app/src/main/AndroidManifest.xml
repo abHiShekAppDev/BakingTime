@@ -12,6 +12,7 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -31,7 +32,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/ingedient_widget_info" />
+                android:resource="@xml/ingredient_widget_info" />
         </receiver>
 
         <service android:name=".widget.WidgetIntentService" />

@@ -108,7 +108,8 @@ public class StepsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(ingredientsList != null){
-            noOfIngredients.setText(String.valueOf("Number of ingredients required -> "+ingredientsList.size()));
+            String ingredientNumber = String.format(getActivity().getResources().getString(R.string.ingredientNumberStr),ingredientsList.size());
+            noOfIngredients.setText(ingredientNumber);
         }
 
         if(stepsList != null){

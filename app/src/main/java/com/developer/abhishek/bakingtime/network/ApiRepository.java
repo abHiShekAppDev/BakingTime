@@ -12,7 +12,7 @@ import retrofit2.Response;
 
 public class ApiRepository {
 
-    private ApiInterface apiInterface = BuildUrl.getRetrofit().create(ApiInterface.class);
+    private final ApiInterface apiInterface = BuildUrl.getRetrofit().create(ApiInterface.class);
 
     public MutableLiveData<List<BakingListModel>> loadAllFood(){
         final MutableLiveData<List<BakingListModel>> bakingModelMutableLiveData = new MutableLiveData<>();

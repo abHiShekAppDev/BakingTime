@@ -10,17 +10,17 @@ import java.util.List;
 public class BakingListModel implements Parcelable{
 
     @SerializedName(ApiEndpoint.ID)
-    private String id;
+    private final String id;
     @SerializedName(ApiEndpoint.NAME)
-    private String name;
+    private final String name;
     @SerializedName(ApiEndpoint.INGREDIENTS)
-    private List<Ingredients> ingredients = null;
+    private final List<Ingredients> ingredients;
     @SerializedName(ApiEndpoint.STEPS)
-    private List<Steps> steps = null;
+    private final List<Steps> steps;
     @SerializedName(ApiEndpoint.SERVINGS)
-    private Integer servings;
+    private final Integer servings;
     @SerializedName(ApiEndpoint.IMAGE)
-    private String image;
+    private final String image;
 
     public BakingListModel(String id, String name, List<Ingredients> ingredients, List<Steps> steps, Integer servings, String image) {
         this.id = id;
