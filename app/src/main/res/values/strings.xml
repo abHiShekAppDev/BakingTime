@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Baking Time</string>
+    <string name="app_name" translatable="false">Lets Cook</string>
 
     <!-- Activity String    -->
     <string name="stepNumberStr">STEP NUMBER -> %d</string>
