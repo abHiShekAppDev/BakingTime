@@ -31,6 +31,20 @@ public class IngredientWidget extends AppWidgetProvider {
 
         loadWidget(context);
 
+        /*
+            Currently I'm opening the HomePage of the app but I tried a lot to open the DetailActivity corresponding to item 
+            currently displayed in widget and for that I used the below code for passing the bakingListModels to detailActivity
+            
+            Intent startIntent = new Intent(HomePage.this,DetailActivity.class);
+            startIntent.putExtra(DetailActivity.INTENT_KEY_FROM_HOME_PAGE,bakingListModels);
+            
+            but this code always passes the initial value of bakingListModels which are during the time of placing widget on Screen
+            so the detailActivity always open the corresponding to the initial value not the current value
+            
+            I tried a lot to find the solution for this but not succedd can you please provide me some hint to solve this problem so that I can 
+            Implement that in my future project
+            
+        */
         //  Clicking start cook will open app
         Intent startIntent = new Intent(context, HomePage.class);
         PendingIntent startPendingIntent = PendingIntent.getActivity(context, 0, startIntent, 0);
