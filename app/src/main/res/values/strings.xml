@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Baking Time</string>
 
+    <!-- Activity String    -->
     <string name="stepNumberStr">STEP NUMBER -> %d</string>
     <string name="ingredientNumberStr">Number of ingredients required -> %d</string>
     <string name="ingredientsStr">Ingredients : </string>
@@ -11,5 +12,5 @@
     <string name="tryAgainStr">Retry</string>
 
     <string name="internetError">Please Check Your Internet Connection</string>
-    <string name="tryAgainError">Please Try Again !!!</string>
+    <string name="tryAgainError">Something Wrong !!!</string>
 </resources>

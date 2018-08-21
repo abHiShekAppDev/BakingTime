@@ -1,7 +1,6 @@
 package com.developer.abhishek.bakingtime.fragment;
 
 import android.content.res.Configuration;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.developer.abhishek.bakingtime.R;
@@ -30,7 +28,6 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +42,7 @@ public class StepDescriptionFragment extends Fragment {
     private final String PLAYBACK_POSITION_SAVED_KEY = "playback_position_key";
     private final String FLAG_SAVED_KEY = "flag_key";
     private final String PLAY_WHEN_READY_SAVED_KEY = "play_when_ready_key";
+    private final String IS_TWO_PANE_SAVED_KEY = "two_pane";
 
     @BindView(R.id.descriptionHeadAtDA)
     TextView head;
@@ -64,6 +62,7 @@ public class StepDescriptionFragment extends Fragment {
     private boolean flag;
     private String videoUrl;
     private boolean isPortrait = true;
+    private boolean isTwoPane = false;
 
     public void setSteps(Steps steps) {
         this.steps = steps;
@@ -77,6 +76,10 @@ public class StepDescriptionFragment extends Fragment {
 
     public void setFlag(boolean flag) {
         this.flag = flag;
+    }
+
+    public void setTwoPane(boolean twoPane) {
+        isTwoPane = twoPane;
     }
 
     public StepDescriptionFragment() {
@@ -101,6 +104,9 @@ public class StepDescriptionFragment extends Fragment {
             }
             if(savedInstanceState.containsKey(PLAY_WHEN_READY_SAVED_KEY)) {
                 playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY_SAVED_KEY);
+            }
+            if(savedInstanceState.containsKey(IS_TWO_PANE_SAVED_KEY)){
+                isTwoPane = savedInstanceState.getBoolean(IS_TWO_PANE_SAVED_KEY);
             }
         }
     }
@@ -158,6 +164,7 @@ public class StepDescriptionFragment extends Fragment {
         outState.putParcelableArrayList(INGREDIENTS_SAVED_KEY, ingredients);
         outState.putParcelable(STEP_SAVED_KEY, steps);
         outState.putBoolean(FLAG_SAVED_KEY, flag);
+        outState.putBoolean(IS_TWO_PANE_SAVED_KEY,isTwoPane);
         if(exoPlayer != null){
             outState.putLong(PLAYBACK_POSITION_SAVED_KEY, exoPlayer.getCurrentPosition());
             outState.putBoolean(PLAY_WHEN_READY_SAVED_KEY, exoPlayer.getPlayWhenReady());
@@ -197,7 +204,9 @@ public class StepDescriptionFragment extends Fragment {
         exoPlayer.seekTo(playbackPosition);
         exoPlayer.setPlayWhenReady(playWhenReady);
 
-        hideBar();
+       if(!isTwoPane){
+           hideBar();
+       }
     }
 
     private void checkOrientation(){

@@ -78,7 +78,7 @@ public class StepsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null){
             if(savedInstanceState.containsKey(RECYCLER_STATE_SAVED_KEY)){
-                parcelable = ((Bundle) savedInstanceState).getParcelable(RECYCLER_STATE_SAVED_KEY);
+                parcelable = savedInstanceState.getParcelable(RECYCLER_STATE_SAVED_KEY);
             }
             if(savedInstanceState.containsKey(STEPS_STATE_SAVED_KEY)){
                 stepsList = savedInstanceState.getParcelableArrayList(STEPS_STATE_SAVED_KEY);

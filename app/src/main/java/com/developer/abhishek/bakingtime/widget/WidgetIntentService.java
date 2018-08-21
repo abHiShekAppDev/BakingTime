@@ -45,7 +45,7 @@ public class WidgetIntentService extends IntentService {
             currentIndex++;
             SharedPreferences.Editor editor = getSharedPreferences(PREF_BAKING_LIST, MODE_PRIVATE).edit();
             editor.putInt(PREF_BAKING_CURRENT_INDEX, currentIndex);
-            editor.commit();
+            editor.apply();
             updateWidget();
         }
     }
@@ -55,7 +55,7 @@ public class WidgetIntentService extends IntentService {
             currentIndex--;
             SharedPreferences.Editor editor = getSharedPreferences(PREF_BAKING_LIST, MODE_PRIVATE).edit();
             editor.putInt(PREF_BAKING_CURRENT_INDEX, currentIndex);
-            editor.commit();
+            editor.apply();
             updateWidget();
         }
     }

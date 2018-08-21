@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.developer.abhishek.bakingtime.DetailActivity;
+import com.developer.abhishek.bakingtime.HomePage;
 import com.developer.abhishek.bakingtime.R;
 import com.developer.abhishek.bakingtime.model.BakingListModel;
 import com.google.gson.Gson;
@@ -32,8 +32,7 @@ public class IngredientWidget extends AppWidgetProvider {
         loadWidget(context);
 
         //  Clicking start cook will open app
-        Intent startIntent = new Intent(context, DetailActivity.class);
-        startIntent.putExtra(DetailActivity.INTENT_KEY_FROM_HOME_PAGE,bakingListModels);
+        Intent startIntent = new Intent(context, HomePage.class);
         PendingIntent startPendingIntent = PendingIntent.getActivity(context, 0, startIntent, 0);
         views.setOnClickPendingIntent(R.id.startCookBtnAtWid, startPendingIntent);
 
@@ -130,7 +129,9 @@ public class IngredientWidget extends AppWidgetProvider {
             }else{
                 views.setViewVisibility(R.id.nextBtnAtWid, View.VISIBLE);
             }
-        }catch (Exception e){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
 

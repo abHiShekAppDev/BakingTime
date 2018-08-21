@@ -16,24 +16,20 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.anything;
 
 @RunWith(AndroidJUnit4.class)
 public class DetailActivityTest {
 
-    private List<Ingredients> ingredientsList = new ArrayList<>();
-    private List<Steps> stepsList = new ArrayList<>();
+    private final List<Ingredients> ingredientsList = new ArrayList<>();
+    private final List<Steps> stepsList = new ArrayList<>();
     private BakingListModel bakingListModel;
 
     @Rule
-    public ActivityTestRule<DetailActivity> activityTestRule = new ActivityTestRule<>(DetailActivity.class,false,false);
+    public final ActivityTestRule<DetailActivity> activityTestRule = new ActivityTestRule<>(DetailActivity.class,false,false);
 
     @Before
     public void setFakeData(){

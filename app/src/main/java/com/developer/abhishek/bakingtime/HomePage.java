@@ -16,13 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.developer.abhishek.bakingtime.adapter.BakingListAdapter;
 import com.developer.abhishek.bakingtime.listener.RecyclerItemClickListener;
@@ -174,8 +172,8 @@ public class HomePage extends AppCompatActivity {
     //  saving to preference to accessible by widget
     private void savedToPref(List<BakingListModel> bakingListModels){
         SharedPreferences.Editor editor = getSharedPreferences(PREF_BAKING_LIST, MODE_PRIVATE).edit();
-        Gson gson = new Gson();
         for(int i=0;i<bakingListModels.size();i++){
+            Gson gson = new Gson();
             String json = gson.toJson(bakingListModels.get(i));
             editor.putString(String.valueOf(i), json);
         }

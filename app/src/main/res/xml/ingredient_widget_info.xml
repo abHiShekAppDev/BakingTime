@@ -6,7 +6,7 @@
     android:minWidth="250dp"
     android:previewImage="@drawable/ic_restaurant_menu_black_24dp"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="86400000"
+    android:updatePeriodMillis="100"
     android:widgetCategory="home_screen"/>
 
 <!--    (cells * 70) - 30 -->

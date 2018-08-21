@@ -26,11 +26,11 @@ import android.widget.TextView;
 @RunWith(AndroidJUnit4.class)
 public class HomePageTest {
 
-    public static final String BAKING_ITEM = "Nutella Pie";
+    private static final String BAKING_ITEM = "Nutella Pie";
     private IdlingResource idlingResource;
 
     @Rule
-    public ActivityTestRule<HomePage> activityTestRule = new ActivityTestRule<>(HomePage.class);
+    public final ActivityTestRule<HomePage> activityTestRule = new ActivityTestRule<>(HomePage.class);
 
     @Before
     public void registerIdlingResource() {

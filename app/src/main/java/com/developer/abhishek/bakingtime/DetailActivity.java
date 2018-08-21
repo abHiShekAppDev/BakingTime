@@ -23,6 +23,9 @@ public class DetailActivity extends AppCompatActivity implements StepsFragment.o
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Intent intent = getIntent();
         if(intent == null){
             closeOnError();
@@ -54,6 +57,7 @@ public class DetailActivity extends AppCompatActivity implements StepsFragment.o
                 StepDescriptionFragment stepDescriptionFragment = new StepDescriptionFragment();
                 stepDescriptionFragment.setFlag(true);
                 stepDescriptionFragment.setIngredients(bakingListModel.getIngredients());
+                stepDescriptionFragment.setTwoPane(twoPaneLayout);
                 getSupportFragmentManager().beginTransaction().add(R.id.stepDescriptionFrameLayoutAtDA,stepDescriptionFragment).commit();
             }
         }
@@ -66,12 +70,14 @@ public class DetailActivity extends AppCompatActivity implements StepsFragment.o
                 StepDescriptionFragment stepDescriptionFragment = new StepDescriptionFragment();
                 stepDescriptionFragment.setFlag(true);
                 stepDescriptionFragment.setIngredients(bakingListModel.getIngredients());
-                getSupportFragmentManager().beginTransaction().add(R.id.stepDescriptionFrameLayoutAtDA,stepDescriptionFragment).commit();
+                stepDescriptionFragment.setTwoPane(twoPaneLayout);
+                getSupportFragmentManager().beginTransaction().replace(R.id.stepDescriptionFrameLayoutAtDA,stepDescriptionFragment).commit();
             }else{
                 StepDescriptionFragment stepDescriptionFragment = new StepDescriptionFragment();
                 stepDescriptionFragment.setFlag(false);
                 stepDescriptionFragment.setSteps(bakingListModel.getSteps().get(position-1));
-                getSupportFragmentManager().beginTransaction().add(R.id.stepDescriptionFrameLayoutAtDA,stepDescriptionFragment).commit();
+                stepDescriptionFragment.setTwoPane(twoPaneLayout);
+                getSupportFragmentManager().beginTransaction().replace(R.id.stepDescriptionFrameLayoutAtDA,stepDescriptionFragment).commit();
             }
         }else{
             Intent intent = new Intent(DetailActivity.this,DescriptionActivity.class);
@@ -81,12 +87,18 @@ public class DetailActivity extends AppCompatActivity implements StepsFragment.o
         }
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void closeOnError(){
-        finish();
         if(toast != null){
             toast.cancel();
         }
         toast = Toast.makeText(DetailActivity.this,getResources().getString(R.string.tryAgainError),Toast.LENGTH_SHORT);
         toast.show();
+        finish();
     }
 }
