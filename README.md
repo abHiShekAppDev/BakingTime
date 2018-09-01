@@ -1,6 +1,6 @@
-# LetsCook
+# Cooking Hub
 _Link of the App on Play Store_<br/>
-**https://play.google.com/store/apps/details?id=com.developer.abhishek.megashow**<br/><br/>
+**https://play.google.com/store/apps/details?id=com.developer.abhishek.CookingHub**<br/><br/>
 This App is done under the **Udacity Nanodegree** course as a project in which user can view the ingredients and steps required for baking an item with the video and the image 
 
 ## Some Main Feature<br/>
